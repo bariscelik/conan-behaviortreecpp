@@ -4,7 +4,7 @@
 #else
 #include "behaviortree_cpp/bt_factory.h"
 #include "behaviortree_cpp/loggers/bt_zmq_publisher.h"
-#if BEHAVIORTREE_VERSION >= 0401001
+#if BEHAVIORTREE_VERSION >= 0x0401001
 #include "behaviortree_cpp/loggers/groot2_publisher.h"
 #endif
 #endif
@@ -119,7 +119,7 @@ int main() {
 
     try {
         
-#if BEHAVIORTREE_VERSION >= 0401001
+#if BEHAVIORTREE_VERSION >= 0x0401001
       Groot2Publisher publisher(tree);
 #else
       PublisherZMQ publisher(tree);

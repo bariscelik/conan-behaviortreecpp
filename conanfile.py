@@ -150,7 +150,7 @@ class BehaviorTreeCPPConan(ConanFile):
         replace_in_file(self,
             path_bt_factory,
             "#define BT_FACTORY_H",
-            "#define BT_FACTORY_H\n#define BEHAVIORTREE_VERSION %02d%02d%03d" % (int(str(ver.major)), int(str(ver.minor)), int(str(ver.patch))))
+            "#define BT_FACTORY_H\n#define BEHAVIORTREE_VERSION 0x%02d%02d%03d" % (int(str(ver.major)), int(str(ver.minor)), int(str(ver.patch))))
 
         cmake = CMake(self)
         cmake.configure()
