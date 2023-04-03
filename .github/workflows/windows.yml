@@ -12,15 +12,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Install python
-      uses: crazy-max/ghaction-chocolatey@v2
-      with:
-        args: install python
-
     - name: Install conan
       uses: crazy-max/ghaction-chocolatey@v2
       with:
         args: install conan --version=1.58.0
+
+    - name: Refresh ENV variables
+      run: refreshenv
 
     - name: Build and test package v4.1.1
       run: conan create . 4.1.1@ -s build_type=Debug -s compiler.cppstd=17 --build missing
