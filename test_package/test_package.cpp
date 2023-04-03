@@ -4,6 +4,9 @@
 #else
 #include "behaviortree_cpp/bt_factory.h"
 #include "behaviortree_cpp/loggers/bt_zmq_publisher.h"
+#if BEHAVIORTREE_VERSION >= 0401001
+#include "behaviortree_cpp/loggers/groot2_publisher.h"
+#endif
 #endif
 
 using namespace BT;
@@ -115,15 +118,20 @@ int main() {
     auto tree = factory.createTreeFromText(xml_text);
 
     try {
+        
+#if BEHAVIORTREE_VERSION >= 0401001
+      Groot2Publisher publisher(tree);
+#else
       PublisherZMQ publisher(tree);
+#endif
+
+#if BEHAVIORTREE_CPP_VERSION < 4
+      tree.tickRoot();
+#else
+      tree.tickWhileRunning();
+#endif
     } catch (const std::exception &e) {
       std::cerr << e.what() << '\n';
     }
-
-#if BEHAVIORTREE_CPP_VERSION < 4
-    tree.tickRoot();
-#else
-    tree.tickWhileRunning();
-#endif
     return 0;
 }
