@@ -18,8 +18,20 @@ jobs:
       with:
         version: 1.58.0
 
-    - name: Refresh ENV variables
-      run: refreshenv
-
+    - name: Build and test package v3.5.6
+      run: conan create . 3.5.6@ -s build_type=Debug -s compiler.cppstd=17 --build missing
+      
+    - name: Build and test package v3.7.0
+      run: conan create . 3.7.0@ -s build_type=Debug -s compiler.cppstd=17 --build missing
+      
+    - name: Build and test package v3.8.3
+      run: conan create . 3.8.3@ -s build_type=Debug -s compiler.cppstd=17 --build missing
+      
+    - name: Build and test package v4.0.1
+      run: conan create . 4.0.1@ -s build_type=Debug -s compiler.cppstd=17 --build missing
+      
+    - name: Build and test package v4.0.2
+      run: conan create . 4.0.2@ -s build_type=Debug -s compiler.cppstd=17 --build missing
+      
     - name: Build and test package v4.1.1
       run: conan create . 4.1.1@ -s build_type=Debug -s compiler.cppstd=17 --build missing
