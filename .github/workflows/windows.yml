@@ -1,4 +1,4 @@
-name: Conan 2 CI
+name: Conan 1.58 Windows
 
 on:
   push:
@@ -12,11 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-- name: Install Conan
+    - name: Install Conan
       id: conan
       uses: turtlebrowser/get-conan@main
       with:
         version: 1.58.0
+
+    - name: Refresh ENV variables
+      run: refreshenv
 
     - name: Build and test package v4.1.1
       run: conan create . 4.1.1@ -s build_type=Debug -s compiler.cppstd=17 --build missing
